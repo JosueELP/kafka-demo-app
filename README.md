@@ -14,17 +14,23 @@ First, let's set up the docker container that will run our Kafka Server.
 The instructions are pretty clear from the docker image: https://hub.docker.com/r/apache/kafka
 But let's simplify it, after you have installed docker, run the following command:
 
-`docker run -d -p 9092:9092 --name kafka-broker apache/kafka:latest`
+```
+docker run -d -p 9092:9092 --name kafka-broker apache/kafka:latest
+```
 
 This will download the image from Apache Kafka and create (and run) a container called kafka-broker.
 
 Now, let's create our example topic, first, execute the following command:
 
-`docker exec --workdir /opt/kafka/bin/ -it broker sh`
+```
+docker exec --workdir /opt/kafka/bin/ -it kafka-broker sh
+```
 
 This will open the shell from the container itself, so now we have to create the kafka topic, in this case, this app is configured to use the topic: topic_example_demo
 
-`./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic topic_example_demo`
+```
+./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic topic_example_demo
+```
 
 That's it!, we have created our kafka server from a docker container with out kafka topic, remember to have up and running this container while running our Spring Boot App.
 
